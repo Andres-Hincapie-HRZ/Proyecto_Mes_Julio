@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: hsl(197, 100%, 50%);
+    color: #000000;
+    min-height: 100vh;
+    display: flex;
+    overflow-x: hidden;
+   
+    
+   
+}
+
+.container{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pantalla{
+    background-color: aqua;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 80px;
+}
+
+#btnNuevoNivel, #btnCargarNiveles{
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
