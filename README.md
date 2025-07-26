@@ -2,7 +2,7 @@
 ### Juego de Plataformas con Creación de Niveles por Dibujo
 
 <img width="1256" height="705" alt="image" src="https://github.com/user-attachments/assets/93fb9395-2088-438b-b834-48cccaa4dfed" />
-<img width="857" height="606" alt="image" src="https://github.com/user-attachments/assets/89542973-dbbd-4552-bbab-b02acf1198ba" />
+<img width="1199" height="644" alt="image" src="https://github.com/user-attachments/assets/55bcc781-e30b-41d1-8dd2-d7be1c5c3576" />
 
 
 ---
