@@ -1,42 +1,396 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: hsl(197, 100%, 50%);
-    color: #000000;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
     min-height: 100vh;
-    display: flex;
     overflow-x: hidden;
-   
-    
-   
 }
 
-.container{
+.container {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
 }
 
-.pantalla{
-    background-color: aqua;
-    padding: 20px;
-    border-radius: 10px;
+.pantalla {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 30px;
     text-align: center;
-    margin-top: 80px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease-in;
 }
 
-#btnNuevoNivel, #btnCargarNiveles{
-    background-color: #000000;
-    color: #fff;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.oculto { display: none; }
+
+h1, h2 {
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 2.5em;
+}
+
+h2 { font-size: 2em; }
+
+button {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 15px 25px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
     cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+}
+
+button:active { transform: translateY(0); }
+
+.instrucciones {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.instrucciones ul {
+    list-style: none;
     margin-top: 10px;
 }
 
+.instrucciones li { margin: 5px 0; }
+
+.color-negro { color: #ffffff; }
+.color-rojo { color: #ff4d4d; }
+.color-azul { color: #4d79ff; }
+.color-verde { color: #4dff4d; }
+
+#canvasJuego {
+    background: white;
+    border-radius: 10px;
+    margin: 20px auto;
+    display: block;
+    max-width: 100%;
+}
+
+.controles {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.controles button {
+    padding: 15px 20px;
+    font-size: 18px;
+    border-radius: 50px;
+    min-width: 60px;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+#subirFoto, #nombreNivel {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    display: block;
+    border: 1px solid #4ecca3;
+    color: white;
+}
+
+#nombreNivel::placeholder { color: rgba(255, 255, 255, 0.7); }
+
+.lista-niveles {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.lista-niveles p {
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+.lista-niveles h3 {
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.lista-niveles h3 i {
+    margin-right: 10px;
+    color: #4ecdc4;
+}
+
+.btn-nivel {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    display: flex;
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    text-align: left;
+    border-radius: 15px;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-nivel:hover { background: linear-gradient(45deg, #44a08d, #4ecdc4); }
+
+.btn-nivel i {
+    font-size: 1.5em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.nombre-nivel {
+    display: block;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.fecha-nivel {
+    display: block;
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+.indicador-carga {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+.barra-superior {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 0 10px;
+}
+
+.btn-volver, .btn-pausar {
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 25px;
+}
+
+.btn-volver:hover, .btn-pausar:hover {
+    background: linear-gradient(45deg, #a29bfe, #6c5ce7);
+}
+
+.btn-control {
+    background: linear-gradient(45deg, #00cec9, #55efc4);
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+}
+
+.btn-control:hover { background: linear-gradient(45deg, #55efc4, #00cec9); }
+
+.btn-secundario {
+    background: linear-gradient(45deg, #636e72, #2d3436);
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 25px;
+}
+
+.btn-secundario:hover { background: linear-gradient(45deg, #2d3436, #636e72); }
+
+/* Pantallas de resultado */
+.overlay-resultado {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.contenido-resultado {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    max-width: 500px;
+    width: 90%;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px) scale(0.9); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.icono-resultado {
+    font-size: 4em;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.victoria .icono-resultado {
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.derrota .icono-resultado {
+    color: #ff4757;
+    text-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+}
+
+.contenido-resultado h2 {
+    font-size: 2.5em;
+    margin: 20px 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.contenido-resultado p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.botones-resultado {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-resultado {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    border: none;
+    padding: 15px 25px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-resultado:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+}
+
+.btn-resultado i { font-size: 1.1em; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container { padding: 10px; }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+    .pantalla { padding: 20px; margin-top: 10px; }
+    
+    .controles {
+        position: fixed;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 15px;
+        border-radius: 20px 20px 0 0;
+        backdrop-filter: blur(10px);
+    }
+    
+    .btn-control {
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+        margin: 3px;
+    }
+    
+    .btn-secundario {
+        padding: 8px 15px;
+        font-size: 12px;
+        margin: 3px;
+    }
+    
+    .barra-superior {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 10px 15px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+    }
+    
+    #canvasJuego {
+        margin-top: 60px;
+        margin-bottom: 120px;
+    }
+    
+    .btn-nivel { padding: 20px; font-size: 16px; }
+    
+    .contenido-resultado {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .contenido-resultado h2 { font-size: 2em; }
+    .icono-resultado { font-size: 3em; }
+    .botones-resultado { gap: 10px; }
+    .btn-resultado { padding: 12px 20px; font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+    .btn-control {
+        width: 50px;
+        height: 50px;
+        font-size: 16px;
+    }
+    
+    .controles { padding: 10px; }
+    .pantalla { padding: 15px; }
+} 

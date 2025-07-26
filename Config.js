@@ -1,59 +1,47 @@
-// condiguracion firebase
+// Configuración de Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyAxvHQ52DeFk1g765EFyMsyqEtx95xMibQ",
-    authDomain: "proyecto-mes-julio-66023.firebaseapp.com",
-    projectId: "proyecto-mes-julio-66023",
-    storageBucket: "proyecto-mes-julio-66023.firebasestorage.app",
-    messagingSenderId: "963435444575",
-    appId: "1:963435444575:web:98dbafd4ea5941bb585eea",
-    measurementId: "G-DBW7CRV7S6"
+    apiKey: "AIzaSyDT4a9WumVBIGHsiBLcLSTn8kZPpV_hijY", // Clave de API para autenticar con Firebase
+    authDomain: "proyecto-mes-julio.firebaseapp.com", // Dominio de autenticación de Firebase
+    projectId: "proyecto-mes-julio", // ID del proyecto en Firebase
+    storageBucket: "proyecto-mes-julio.firebasestorage.app", // Bucket de almacenamiento en Firebase
+    messagingSenderId: "285166641330", // ID del remitente para mensajes (notificaciones)
+    appId: "1:285166641330:web:e5c5cd3c4da4bef05b69ab", // ID de la aplicación
+    measurementId: "G-ZV24LDPJ8G" // ID para medición (Google Analytics)
 };
 
-// inicializar firebase
-const app = firebase.initializeApp(firebaseConfig);
+// Inicialización de la app de Firebase con la configuración anterior
+firebase.initializeApp(firebaseConfig);
 
-// obtener bd
-const db = firebase.firestore(app);
+// Se obtiene la referencia a la base de datos Firestore de Firebase
+const db = firebase.firestore();
 
-// funcion asincrona para subir imagen a img bb
-async function subirImagenImgBB(archivo) {
-    // obtner objeto para subir imagen 
+// Función asíncrona para subir una imagen a imgBB
+async function subirImagenAImgBB(archivo) {
+    // Se crea un nuevo objeto FormData para enviar la imagen
     const formData = new FormData();
-    // agregar el img al formdata
-    formData.append("image", archivo);
+    // Se agrega el archivo de imagen al FormData bajo la clave 'image'
+    formData.append('image', archivo);
 
-
-    // Subir imagen a img bb
     try {
-        const respuesta = await fetch(`https://api.imgbb.com/1/upload?key=1:963435444575:web:98dbafd4ea5941bb585eea`, {
-            method: "POST", // tipo de  metodo http post
-            body: formData, // datos a enviar
-            headers: { 'Accept': 'application/json' } // tipo de respuesta
+        // Se realiza una petición POST a la API de imgBB con la imagen adjunta
+        const response = await fetch('https://api.imgbb.com/1/upload?key=fb090f1e8752c6cbd2b205df0f0e2605', {
+            method: 'POST', // Método HTTP POST
+            body: formData, // El cuerpo de la petición es el FormData con la imagen
+            headers: { 'Accept': 'application/json' } // Se espera una respuesta en formato JSON
         });
-
-        // verificar si la respuesta fue correcta
-        if (respuesta.ok) throw new Error('Error al subir imagen: ${respuesta.status}');
-
-        // recibir la respuesta y convertirla 
-        const data = await respuesta.json();
-
-        // verificar la subida de la Imagen 
+        
+        // Si la respuesta no es exitosa, se lanza un error con el código de estado HTTP
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        
+        // Se convierte la respuesta a JSON
+        const data = await response.json();
+        // Si la subida fue exitosa, se retorna la URL de la imagen subida
         if (data.success) return data.data.url;
-
-        // verificar errores 
-        throw new Error('Error al subir imagen');
-
-    // manejar errores  subida de la imagen 
+        // Si la respuesta de imgBB indica fallo, se lanza un error
+        throw new Error('Error en la respuesta de imgBB');
     } catch (error) {
+        // Si ocurre cualquier error, se muestra en consola y se vuelve a lanzar el error
         console.error('Error al subir imagen:', error);
         throw error;
     }
-}
-
-
-
-
-
-
-
-
+} 

@@ -1,24 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crea y juega</title>
+    <title>Juego de Dibujo y Plataformas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
     <div class="container">
-        <div id="menuPantalla" class="pantalla">
-            <h1>Crea y Juega</h1>
-            <button id="btnNuevoNivel">Crear Nivel</button>
-            <button id="btnCargarNiveles">Cargar niveles</button>
+        <div id="menuPrincipal" class="pantalla">
+            <h1>Dibuja y Juega</h1>
+            <button id="btnNuevoNivel"><i class="fas fa-plus-circle"></i> Crear Nuevo Nivel</button>
+            <button id="btnCargarNiveles"><i class="fas fa-download"></i> Cargar Niveles</button>
         </div>
 
-        
+        <div id="creadorNivel" class="pantalla oculto">
+            <h2>Crear Nivel</h2>
+            <div class="instrucciones">
+                <p><i class="fas fa-palette"></i> Dibuja en papel usando:</p>
+                <ul>
+                    <li><span class="color-negro">⬛ Negro</span> - Plataformas</li>
+                    <li><span class="color-rojo">🟥 Rojo</span> - Peligros</li>
+                    <li><span class="color-azul">🟦 Azul</span> - Trampolines</li>
+                    <li><span class="color-verde">🟩 Verde</span> - Escudos</li>
+                </ul>
+            </div>
+            <input type="text" id="nombreNivel" placeholder="Nombre del nivel" maxlength="50">
+            <input type="file" id="subirFoto" accept="image/*" capture="camera">
+            <button id="btnSubirNivel"><i class="fas fa-upload"></i> Subir Nivel</button>
+            <button id="btnVolverMenu"><i class="fas fa-arrow-left"></i> Volver al Menú</button>
+        </div>
 
-
+        <div id="juego" class="pantalla oculto">
+            <div class="barra-superior">
+                <button id="btnVolverMenuJuego" class="btn-volver"><i class="fas fa-home"></i> Menú</button>
+                <button id="btnPausarJuego" class="btn-pausar"><i class="fas fa-pause"></i> Pausa</button>
+            </div>
+            <canvas id="canvasJuego"></canvas>
+            <div class="controles">
+                <button id="btnIzquierda" class="btn-control"><i class="fas fa-arrow-left"></i></button>
+                <button id="btnDerecha" class="btn-control"><i class="fas fa-arrow-right"></i></button>
+                <button id="btnSaltar" class="btn-control"><i class="fas fa-arrow-up"></i></button>
+                <button id="btnDebug" class="btn-secundario"><i class="fas fa-bug"></i></button>
+                <button id="btnReiniciar" class="btn-secundario"><i class="fas fa-redo"></i></button>
+            </div>
+        </div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -26,5 +53,4 @@
     <script src="config.js"></script>
     <script src="juego.js"></script>
 </body>
-
-</html>
+</html> 
