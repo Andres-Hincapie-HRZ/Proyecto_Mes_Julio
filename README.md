@@ -1,6 +1,7 @@
 # 🎮 PixelCraft Adventures
 ### Juego de Plataformas con Creación de Niveles por Dibujo
 
+<img width="1386" height="778" alt="image" src="https://github.com/user-attachments/assets/3c311518-3b0c-4019-9ce2-cfc22621a21a" />
 
 
 ---
